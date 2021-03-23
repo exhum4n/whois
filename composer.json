@@ -1,0 +1,22 @@
+{
+    "name": "exhum4n/whois",
+    "description": "Tool for receiving ip geolocation data",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Станислав Чурилов",
+            "email": "exhum4n.dev@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Exhum4n\\Whois\\": "src/"
+        }
+    },
+    "require": {
+        "ext-curl": "*",
+        "ext-json": "*"
+    }
+}
