@@ -7,18 +7,25 @@ namespace Exhum4n\Whois;
 class Response
 {
     /**
-     * IP used for the query (e.g. 8.8.4.4)
-     *
-     * @var string
-     */
-    public $ip;
-
-    /**
      * Request status true or false
      *
      * @var bool
      */
     public $success;
+
+    /**
+     * Response message
+     *
+     * @var string
+     */
+    public $message;
+
+    /**
+     * IP used for the query (e.g. 8.8.4.4)
+     *
+     * @var string
+     */
+    public $ip;
 
     /**
      * included only when success is false

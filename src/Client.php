@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Exhum4n\Whois;
 
+use Exhum4n\Whois\Exceptions\RequestException;
+
 class Client
 {
     /**
@@ -38,6 +40,8 @@ class Client
      * @param string $ip
      *
      * @return Response
+     *
+     * @throws RequestException
      */
     public function get(string $ip): Response
     {
@@ -45,7 +49,12 @@ class Client
 
         $response = $this->makeRequest($url);
 
-        return new Response($response);
+        $response = new Response($response);
+        if ($response->success === false) {
+            throw new RequestException($response->message);
+        }
+
+        return $response;
     }
 
     /**
