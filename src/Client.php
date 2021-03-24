@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exhum4n\Whois;
 
-class WhoisService
+class Client
 {
     /**
      * @var string
@@ -37,15 +37,15 @@ class WhoisService
     /**
      * @param string $ip
      *
-     * @return WhoisResponse
+     * @return Response
      */
-    public function get(string $ip): WhoisResponse
+    public function get(string $ip): Response
     {
         $url = $this->getServiceUrl($ip);
 
         $response = $this->makeRequest($url);
 
-        return new WhoisResponse($response);
+        return new Response($response);
     }
 
     /**

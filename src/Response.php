@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Exhum4n\Whois;
 
-class WhoisResponse
+class Response
 {
     /**
      * IP used for the query (e.g. 8.8.4.4)
