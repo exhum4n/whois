@@ -16,6 +16,11 @@ class Client
     /**
      * @var string
      */
+    private $myDev = 'https://exhum4n.dev/api';
+
+    /**
+     * @var string
+     */
     private $premiumDz = 'pro';
 
     /**
@@ -49,12 +54,35 @@ class Client
 
         $response = $this->makeRequest($url);
 
+        if ($response['country'] === null) {
+            $realIp = $this->getRealIp();
+
+            return $this->get($realIp);
+        }
+
         $response = new Response($response);
+
         if ($response->success === false) {
             throw new RequestException($response->message);
         }
 
         return $response;
+    }
+
+    /**
+     * @return string
+     *
+     * @throws RequestException
+     */
+    public function getRealIp(): string
+    {
+        $response = $this->makeRequest("$this->myDev/ip");
+
+        if (isset($response['ip']) === false) {
+            throw new RequestException('Can not receive ip address.');
+        }
+
+        return $response['ip'];
     }
 
     /**
