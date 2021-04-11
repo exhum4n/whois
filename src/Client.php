@@ -55,9 +55,9 @@ class Client
         $response = $this->makeRequest($url);
 
         if ($response['country'] === null) {
-            $realIp = $this->getRealIp();
+            $ip = $this->getRealIp();
 
-            return $this->get($realIp);
+            return $this->get($ip);
         }
 
         $response = new Response($response);
