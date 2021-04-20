@@ -5,7 +5,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Станислав Чурилов",
+            "name": "Stanislav Churilov",
             "email": "exhum4n.dev@gmail.com"
         }
     ],
@@ -13,6 +13,13 @@
     "autoload": {
         "psr-4": {
             "Exhum4n\\Whois\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Exhum4n\\Whois\\Providers\\WhoisServiceProvider"
+            ]
         }
     },
     "require": {

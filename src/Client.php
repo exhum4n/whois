@@ -16,11 +16,6 @@ class Client
     /**
      * @var string
      */
-    private $myDev = 'https://exhum4n.dev/api';
-
-    /**
-     * @var string
-     */
     private $premiumDz = 'pro';
 
     /**
@@ -53,11 +48,8 @@ class Client
         $url = $this->getServiceUrl($ip);
 
         $response = $this->makeRequest($url);
-
-        if ($response['country'] === null) {
-            $ip = $this->getRealIp();
-
-            return $this->get($ip);
+        if (is_null($response)) {
+            throw new RequestException('Can not connect to whois service.');
         }
 
         $response = new Response($response);
@@ -66,23 +58,11 @@ class Client
             throw new RequestException($response->message);
         }
 
-        return $response;
-    }
-
-    /**
-     * @return string
-     *
-     * @throws RequestException
-     */
-    public function getRealIp(): string
-    {
-        $response = $this->makeRequest("$this->myDev/ip");
-
-        if (isset($response['ip']) === false) {
-            throw new RequestException('Can not receive ip address.');
+        if (is_null($response->country)) {
+            return new Response(config('whois.location.default'));
         }
 
-        return $response['ip'];
+        return $response;
     }
 
     /**
@@ -102,9 +82,9 @@ class Client
     /**
      * @param string $url
      *
-     * @return array
+     * @return array|null
      */
-    private function makeRequest(string $url): array
+    private function makeRequest(string $url): ?array
     {
         $ch = curl_init($url);
 
