@@ -58,10 +58,6 @@ class Client
             throw new RequestException($response->message);
         }
 
-        if (is_null($response->country)) {
-            return new Response(config('whois.location.default'));
-        }
-
         return $response;
     }
 

@@ -15,13 +15,6 @@
             "Exhum4n\\Whois\\": "src/"
         }
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Exhum4n\\Whois\\Providers\\WhoisServiceProvider"
-            ]
-        }
-    },
     "require": {
         "ext-curl": "*",
         "ext-json": "*"
