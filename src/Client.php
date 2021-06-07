@@ -27,13 +27,20 @@ class Client
      * @var string
      */
     private $key;
+    
+    /**
+     * @var string
+     */
+    private $locale;
 
     /**
      * @param string|null $key
+     * @param string|null $locale
      */
-    public function __construct(?string $key = null)
+    public function __construct(?string $key = null, ?string $locale = null)
     {
         $this->key = $key;
+        $this->locale = $locale ?: 'en';
     }
 
     /**
@@ -69,10 +76,10 @@ class Client
     private function getServiceUrl(string $ip): string
     {
         if (is_null($this->key)) {
-            return "{$this->serviceUrl}{$this->freeDZ}/json/{$ip}";
+            return "{$this->serviceUrl}{$this->freeDZ}/json/{$ip}?lang={$this->locale}";
         }
 
-        return "{$this->serviceUrl}{$this->premiumDz}/json/{$ip}?key={$this->key}";
+        return "{$this->serviceUrl}{$this->premiumDz}/json/{$ip}?lang={$this->locale}&key={$this->key}";
     }
 
     /**
