@@ -27,7 +27,7 @@ class Client
      * @var string
      */
     private $key;
-    
+
     /**
      * @var string
      */
